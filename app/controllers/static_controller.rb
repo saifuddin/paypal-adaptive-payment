@@ -4,14 +4,14 @@ class StaticController < ApplicationController
 
   def pay
     @api = PayPal::SDK::AdaptivePayments.new
-    @amount = params[:amount].to_f
+    Sand.amount = @amount = params[:amount].to_f
     @to_owner = @amount - (0.05*@amount)
     @pay = @api.build_pay({
       :actionType => "PAY_PRIMARY",
-      :cancelUrl => "http://localhost:3000/samples/adaptive_payments/pay",
+      :cancelUrl => "http://#{request.host}:#{request.port}/",
       :currencyCode => "USD",
       :feesPayer => "SECONDARYONLY",
-      :ipnNotificationUrl => "http://localhost:3000/samples/adaptive_payments/ipn_notify",
+      :ipnNotificationUrl => "http://#{request.host}:#{request.port}/",
       :receiverList => {
         :receiver => [
           {
@@ -26,16 +26,12 @@ class StaticController < ApplicationController
           }
         ]
       },
-      :returnUrl => "http://localhost:3000/static/finally" })
+      :returnUrl => "http://#{request.host}:#{request.port}/static/finally" })
 
     @response = @api.pay(@pay)
-    p paykey = @response.payKey
-    p @response.error[0].message
-    p @response.paymentExecStatus
-    byebug
-    # Access response
+
     if @response.success? && @response.payment_exec_status != "ERROR"
-      @response.payKey
+      Sand.pay_key = @response.payKey
       redirect_to @api.payment_url(@response)
     else
       @response.error[0].message
@@ -43,7 +39,13 @@ class StaticController < ApplicationController
   end
 
   def finally
-    byebug
-    p ''
+    @amount = Sand.amount
+  end
+
+  def execute_payment
+    @api = PayPal::SDK::AdaptivePayments::API.new
+    @execute_payment_request = @api.build_execute_payment()
+    @execute_payment_request.payKey = Sand.pay_key
+    @execute_payment_response = @api.execute_payment(@execute_payment_request)
   end
 end

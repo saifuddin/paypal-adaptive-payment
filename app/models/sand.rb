@@ -1,4 +1,23 @@
 class Sand
+  @@pay_key = ""
+  @@amount = 0.0
+
+  def self.pay_key
+    @@pay_key
+  end
+
+  def self.pay_key=(pk)
+    @@pay_key = pk
+  end
+
+  def self.amount
+    @@amount
+  end
+
+  def self.amount=(a)
+    @@amount = a
+  end
+
   def self.build(api)
     api.build_pay({
       :actionType => "PAY",

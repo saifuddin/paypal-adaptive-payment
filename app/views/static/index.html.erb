@@ -1,4 +1,4 @@
 <%= form_for :amount, :url => {:controller => :static, :action => :pay} do |f| %>
-  Amount: <%= text_field_tag :amount %>
-<%= f.submit %>
+  Give amount to pledge: <%= text_field_tag :amount %>
+<%= f.submit 'Pledge!' %>
 <% end %>

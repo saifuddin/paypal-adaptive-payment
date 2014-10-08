@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'static/execute_payment'
   get 'static/finally'
   get 'static/index'
   post 'static/pay'
