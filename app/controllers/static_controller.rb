@@ -34,7 +34,7 @@ class StaticController < ApplicationController
       Sand.pay_key = @response.payKey
       redirect_to @api.payment_url(@response)
     else
-      @response.error[0].message
+      @msg = @response.error[0].message
     end
   end
 
