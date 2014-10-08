@@ -1,0 +1,50 @@
+scenarios:
+
+1. pledger have paypal account, owner have paypal account
+- pledger pays to wtf, then wtf pays to owner
+- owner will bear all 5% + transactional cost
+
+2. pledger doesn't have paypal account, owner have paypal account
+- wtf pays to owner using checks / paypal?
+
+3. pledger have paypal account, owner doesn't have paypal account
+- pledger pays to wtf.
+- owner will bear all 5% + transactional cost
+
+todo:
+- see flow for different perspectives, assuming all has a paypal account
+- how much will be deducted from the payment to owner
+
+wtf
+
+pledger
+
+owner
+
+@pay = @api.build_pay({
+  :actionType => "PAY",
+  :cancelUrl => "http://localhost:3000/samples/adaptive_payments/pay",
+  :currencyCode => "USD",
+  :feesPayer => "SENDER",
+  :ipnNotificationUrl => "http://localhost:3000/samples/adaptive_payments/ipn_notify",
+  :receiverList => {
+    :receiver => [{
+      :amount => 1.0,
+      :email => "platfo_1255612361_per@gmail.com" }] },
+  :returnUrl => "http://localhost:3000/samples/adaptive_payments/pay" })
+
+wtf-facilitator@wtf.my
+pass: 1398626300
+phone: 4084525607
+
+pledger2-business@wtf.my
+username: pledger2-business_api1.wtf.my
+phone: 4088962496
+password: QMHHV8NCK9TYLDLE
+signature: AiPC9BjkCyDFQXbSkoZcgqH3hpacAUhnQIktNnZaffoXZVlJH1IgS40L
+
+personal@wtf.my
+QMHHV8NCK9TYLDLE
+
+
+AP-4MP00280AT720645F

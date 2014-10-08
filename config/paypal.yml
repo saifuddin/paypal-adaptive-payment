@@ -1,0 +1,29 @@
+test: &default
+
+  # Credentials for REST APIs
+  client_id: AcJHnRDm8co3SoHUcAsF1vG-QIKFcz_zgQmv2RmYN3uTM3Td8G7ekeWwabud
+  client_secret: ENXhWxBa81Jw0HBMQC-0OjJt71uh0iLMzWLPeFAu9lxkpnf_8UAoWQHfJIkQ
+
+  # Mode can be 'live' or 'sandbox'
+  mode: sandbox
+
+  # Credentials for Classic APIs
+  app_id: APP-80W284485P519543T
+  username: wtf-facilitator_api1.wtf.my
+  password: 1398626300
+  signature: AiPC9BjkCyDFQXbSkoZcgqH3hpacAZ2QAHajjNuaXpWLXIw.Pm8zalFM
+  # # With Certificate
+  # cert_path: "config/cert_key.pem"
+  sandbox_email_address: wtf-facilitator@wtf.my
+
+  # # IP Address
+  # ip_address: 127.0.0.1
+  # # HTTP Proxy
+  # http_proxy: http://proxy-ipaddress:3129/
+
+development:
+  <<: *default
+
+production:
+  <<: *default
+  mode: live
