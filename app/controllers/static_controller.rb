@@ -9,7 +9,7 @@ class StaticController < ApplicationController
     @pay = @api.build_pay({
       :actionType => "PAY_PRIMARY",
       :cancelUrl => "http://#{request.host}:#{request.port}/",
-      :currencyCode => "USD",
+      :currencyCode => "MYR",
       :feesPayer => "SECONDARYONLY",
       :ipnNotificationUrl => "http://#{request.host}:#{request.port}/",
       :receiverList => {
@@ -17,16 +17,16 @@ class StaticController < ApplicationController
           {
             :primary => true, 
             :amount => @amount,
-            :email => "wtf-facilitator@wtf.my"
+            :email => "wtf-admin@wtf.my"
           },
           {
             :amount => @to_owner,
-            :email => "pledger2-business@wtf.my",
+            :email => "personal1-myr@wtf.my", # sg
             :primary => false
           }
         ]
       },
-      :returnUrl => "http://#{request.host}:#{request.port}/static/finally" })
+      :returnUrl => "http://#{request.host}:#{request.port}/static/finally" }) # change the url here
 
     @response = @api.pay(@pay)
 
@@ -39,6 +39,7 @@ class StaticController < ApplicationController
   end
 
   def finally
+    debugger
     @amount = Sand.amount
   end
 
